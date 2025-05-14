@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>US Telephone Number Validator</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; display: flex; justify-content: center; align-items: center; height: 100vh; }
+    .container { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 320px; }
+    h1 { text-align: center; font-size: 1.5rem; margin-bottom: 16px; color: #333; }
+    #user-input { width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
+    .buttons { display: flex; justify-content: space-between; }
+    button { padding: 10px 14px; border: none; border-radius: 4px; cursor: pointer; font-size: 1rem; transition: background 0.3s; }
+    #check-btn { background: #007bff; color: #fff; }
+    #check-btn:hover { background: #0056b3; }
+    #clear-btn { background: #dc3545; color: #fff; }
+    #clear-btn:hover { background: #a71d2a; }
+    #results-div { margin-top: 16px; font-weight: bold; text-align: center; min-height: 1.2em; color: #333; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>US Phone Validator</h1>
+    <input type="text" id="user-input" placeholder="Enter phone number" />
+    <div class="buttons">
+      <button id="check-btn">Check</button>
+      <button id="clear-btn">Clear</button>
+    </div>
+    <div id="results-div"></div>
+  </div>
+  <script>
+    const userInput = document.getElementById('user-input');
+    const checkBtn = document.getElementById('check-btn');
+    const clearBtn = document.getElementById('clear-btn');
+    const resultsDiv = document.getElementById('results-div');
+
+    // Regex to validate US phone number formats with optional country code 1
+    const phoneRegex = /^(1\s?)?(\(\d{3}\)|\d{3})([\s\-])?\d{3}([\s\-])?\d{4}$/;
+
+    checkBtn.addEventListener('click', () => {
+      const value = userInput.value.trim();
+      if (!value) {
+        alert('Please provide a phone number');
+        return;
+      }
+      if (phoneRegex.test(value)) {
+        resultsDiv.textContent = 'Valid US number: ' + value;
+      } else {
+        resultsDiv.textContent = 'Invalid US number: ' + value;
+      }
+    });
+
+    clearBtn.addEventListener('click', () => {
+      resultsDiv.textContent = '';
+      userInput.value = '';
+      userInput.focus();
+    });
+  </script>
+</body>
+</html>
